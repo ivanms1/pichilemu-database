@@ -4,8 +4,11 @@ const Student = require('../models/Student');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	Student.find({}, { name: 1, _id: 0, country: 1 })
-	.then(students => res.json(students))
+	Student.find({}, { name: 1, country: 1, school: 1 })
+	.then(students => {
+		if(students.length === 0) return res.status(404).json({msg: 'There are no students'})
+		res.json(students)
+	})
 	.catch(err => res.json(err));
 });
 
@@ -21,9 +24,10 @@ router.get('/:studentId', (req, res) => {
 router.post('/', (req, res) => {
 	const newStudent = {
 		name: req.body.name,
+		school: req.body.school,
 		country: req.body.country,
 		passport: req.body.passport,
-		birthday: new Date(req.body.birthday),
+		birthday: req.body.birthday,
 		balance: req.body.balance,
 		visa: req.body.visa,
 		comments: req.body.comments
@@ -49,6 +53,16 @@ router.put('/:studentId', (req, res) => {
 		res.json(student);
 	})
 	.catch(err => res.status(400).json(err))
+});
+
+router.delete('/:studentId', (req, res) => {
+	Student.deleteOne({ _id: req.params.studentId })
+	.then(student => {
+		if(!student) return res.status(404).json({msg:'Student not found'});
+		res.json({msg: 'Student deleted'})
+	})
+	.catch(err => res.status(404).json(err));
 })
+
 
 module.exports = router;

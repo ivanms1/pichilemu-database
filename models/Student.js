@@ -6,6 +6,10 @@ const StudentSchema = new Schema ({
 		type: String,
 		required: true
 	},
+	school: {
+		type: String,
+		required: true
+	},
 	country: {
 		type: String,
 		required: true
@@ -31,4 +35,4 @@ const StudentSchema = new Schema ({
 	}
 });
 
-module.exports = User = mongoose.model('students', StudentSchema);
+module.exports = Student = mongoose.model('students', StudentSchema);
