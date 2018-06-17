@@ -16,7 +16,7 @@ const SchoolSchema = new Schema ({
 		type: Date,
 		required: true
 	},
-	finish:{
+	end:{
 		type: Date,
 		required: true
 	},

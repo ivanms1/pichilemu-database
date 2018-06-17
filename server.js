@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const app = express();
+const PORT = process.env.PORT || 5000
 
 const students = require('./routes/students');
 const staff = require('./routes/staff');
@@ -18,7 +19,7 @@ mongoose.connect(db)
 .then((err, client) => {
 	console.log('MongoDB connected')
 })
-.catch(err => console.log(err));
+.catch(err => console.log(serr));
 
 app.use('/students', students);
 app.use('/staff', staff);
@@ -28,6 +29,6 @@ app.get('/', (req, res) => {
 	res.json({pichi: 'Pichilemu database'})
 });
 
-app.listen(3000, () => {
-	console.log('Listening on port 3000')
+app.listen(PORT, () => {
+	console.log(`Listening on port ${PORT}`)
 })

@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
 		if(students.length === 0) return res.status(404).json({msg: 'There are no students'})
 		res.json(students)
 	})
+	
 	.catch(err => res.json(err));
 });
 
@@ -35,7 +36,7 @@ router.post('/', (req, res) => {
 
 	Student.findOne({ passport: newStudent.passport })
 	.then(student => {
-		if(student) return res.json({ msg: 'Student already in database' });
+		if(student) return res.status(400).json({ msg: 'Student already in database' });
 		else {
 			new Student(newStudent).save()
 			.then(student => {

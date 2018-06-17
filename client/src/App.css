@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+}
+
+.navbar{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navbar a {
+  text-decoration: none;
+}
+
+
+.schools {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: auto;
+}
+
+.students h3 {
+  text-align: left;
+}
+
+.student-form {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: 1fr 1fr;
+	justify-items: center;
+	align-items: center;
+}
+
+.student-form *{
+	text-align: center;
+}
+
+.add-student {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(7, 160px);
+  justify-items: center;
+  align-items: center;
+}
+
