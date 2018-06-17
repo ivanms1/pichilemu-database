@@ -1,5 +1,6 @@
 const express = require('express');
 const Student = require('../models/Student');
+const assert = require('assert');
 
 const router = express.Router();
 
@@ -11,6 +12,20 @@ router.get('/', (req, res) => {
 	})
 	
 	.catch(err => res.json(err));
+});
+
+//GET with parameters, use POST to get parameters
+
+router.post('/search', (req, res) => {
+	let params = req.body;
+	console.log(params)
+	Student.find(params, { name: 1, country: 1, school: 1 })
+	.then(students => {
+		if(students.length === 0) return res.status(404).json({msg: 'There are no students'})
+		res.json(students)
+	})
+	
+	.catch(err => res.json(err.response.data));
 });
 
 router.get('/:studentId', (req, res) => {
@@ -42,7 +57,7 @@ router.post('/', (req, res) => {
 			.then(student => {
 				res.json(student)
 			})
-			.catch(err => console.log(err));
+			.catch(err => res.json(err));
 		}
 	})
 })

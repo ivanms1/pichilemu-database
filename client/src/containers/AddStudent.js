@@ -3,13 +3,13 @@ import axios from 'axios';
 
 export default class AddStudent extends Component {
 	state = {
-		name: null,
-		school: null,
-		country: null,
-		passport: null,
-		birthday: null,
-		balance: null,
-		visa: null
+		name: '',
+		school: 'DTS',
+		country: '',
+		passport: '',
+		birthday: '',
+		balance: '',
+		visa: ''
 
 	}
 
@@ -42,13 +42,13 @@ export default class AddStudent extends Component {
   		axios.post('/students', student)
   		.then(res => alert(`${res.data.name} added`))
   		.then(() => this.setState({
-  			name: null
-			school: null,
-			country: null,
-			passport: null,
-			birthday: null,
-			balance: null,
-			visa: null
+  			name: '',
+			school: 'DTS',
+			country: '',
+			passport: '',
+			birthday: '',
+			balance: '',
+			visa: false
 			})
   		)
     	.catch(err => console.log(err.response.data))
@@ -64,33 +64,33 @@ export default class AddStudent extends Component {
 				<p>Birthday</p>
 				<p>Balance</p>
 				<p>Visa</p>
-				<input name="name"
+				<input value={this.state.name} name="name"
 					onChange={this.handleChange}
 					type="text"
-					placeholder="Name"/>
-				<select name="school" onChange={this.handleChange}>
+					placeholder="Name" required/>
+				<select value={this.state.schoool} name="school" onChange={this.handleChange} required>
 					<option value="DTS">DTS</option>
 					<option value="FCM">FCM</option>
 					<option value="SBS">SBS</option>
 					<option value="BCC">BCC</option>
 					</select>
-				<input name="country"
+				<input value={this.state.country} name="country"
 					onChange={this.handleChange}
 					type="text"
-					placeholder="Country"/>
-				<input name="passport"
+					placeholder="Country" required/>
+				<input value={this.state.passport} name="passport"
 					onChange={this.handleChange}
 					type="text"
-					placeholder="Passport"/>
-				<input name="birthday"
+					placeholder="Passport" required/>
+				<input value={this.state.birthday} name="birthday"
 					onChange={this.handleChange}
 					type="date"
-					placeholder="Birthday"/>
-				<input name="balance"
+					placeholder="Birthday" required/>
+				<input value={this.state.balance} name="balance"
 					onChange={this.handleChange}
 					type="number"
-					placeholder="Balance"/>
-				<input name="visa"
+					placeholder="Balance" required/>
+				<input value={this.state.visa} name="visa"
 					onChange={this.handleChange}
 					type="checkbox"/>
 				<input value="Create Student" type="submit"/>

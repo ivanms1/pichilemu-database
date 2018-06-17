@@ -8,14 +8,14 @@ import Student from '../components/Student';
 export default class Students extends Component {
 	state = {
 		students: null,
-		school: null,
+		school: 'All',
 		date: null,
 		country: null
 
 	}
 
-
 	handleChange = this.handleChange.bind(this);
+	handleSubmit = this.handleSubmit.bind(this);
 
 	handleChange(e){
     const target = e.target;
@@ -27,18 +27,31 @@ export default class Students extends Component {
     })
   }
 
+  handleSubmit(e){
+	  e.preventDefault();
+	  let params = {};
+	  if(this.state.school !== 'All') params.school = this.state.school;
+	  if(this.state.country) params.country = this.state.country;
+	  if(this.state.date) params.date = this.state.date;
+
+	  axios.post('students/search', params)
+	  .then(res => console.log(res.data))
+	  .catch(err => console.log(err));
+  }
+
 
 
 	render(){
 		return(
 			<div className="students">
 				<h3>Search Students</h3>
-				<form className="student-form">
+				<form onSubmit={this.handleSubmit} className="student-form">
 					<p>School</p>
 					<p>Date</p>
 					<p>Country</p>
 					<input type="submit" value="Search"/>
 					<select name="school" onChange={this.handleChange}>
+						<option value="All">All</option>
 						<option value="DTS">DTS</option>
 						<option value="FCM">FCM</option>
 						<option value="SBS">SBS</option>
